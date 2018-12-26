@@ -13,22 +13,8 @@
     "lint": "eslint \"**/*.js\" --fix",
     "test": "nyc --reporter=text --reporter=html --reporter=lcov mocha --compilers js:babel-core/register ./server/tests/** --timeout 35000 --exit"
   },
-  "keywords": [
-    "pizza",
-    "delivery",
-    "payment",
-    "stripe"
-  ],
   "author": "Fluidangle",
   "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://gitlab.com/fluidangle/nico-pizza-backend.git"
-  },
-  "bugs": {
-    "url": "https://gitlab.com/fluidangle/nico-pizza-backend/issues"
-  },
-  "homepage": "https://gitlab.com/fluidangle/nico-pizza-backend#readme",
   "description": "",
   "dependencies": {
     "aws-sdk": "^2.381.0",
