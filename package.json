@@ -1,0 +1,65 @@
+{
+  "name": "streamjar",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel ./ -d build --ignore node_modules/ --presets=env --source-maps inline --copy-files",
+    "prebuild": "rm -rf build/*",
+    "prestart": "npm run build",
+    "start": "npm run start:prod",
+    "start:prod": "npm run prestart && NODE_ENV=production node ./build/bin/www",
+    "start:dev": "nodemon --exec babel-node ./bin/www",
+    "dev": "npm run start:dev",
+    "lint": "eslint \"**/*.js\" --fix",
+    "test": "nyc --reporter=text --reporter=html --reporter=lcov mocha --compilers js:babel-core/register ./server/tests/** --timeout 35000 --exit"
+  },
+  "keywords": [
+    "pizza",
+    "delivery",
+    "payment",
+    "stripe"
+  ],
+  "author": "Fluidangle",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/fluidangle/nico-pizza-backend.git"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/fluidangle/nico-pizza-backend/issues"
+  },
+  "homepage": "https://gitlab.com/fluidangle/nico-pizza-backend#readme",
+  "description": "",
+  "dependencies": {
+    "aws-sdk": "^2.381.0",
+    "axios": "^0.18.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "bcrypt": "^3.0.2",
+    "body-parser": "^1.18.3",
+    "bunyan": "^1.8.12",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "helmet": "^3.15.0",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.4.0",
+    "multer": "^1.4.1",
+    "multer-s3": "^2.9.0",
+    "stripe": "^6.20.0",
+    "validator": "^10.9.0"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "eslint": "^5.11.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "logger": "0.0.1",
+    "morgan": "^1.9.1"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "streamjar-server",
+  "version": 1,
+  "env": {
+    "SECRET": "389h3893mz3893m983m3z89z3m893"
+  },
+  "alias": "streamjar.techbuds.org"
+}

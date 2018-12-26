@@ -1,0 +1,58 @@
+# Node docker image on which this would be run
+image: node:8.10.0
+
+cache:
+  paths:
+    - node_modules/
+
+#This command is run before actual stages start running
+before_script:
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - npm init -y
+  - npm cache clean --force
+  - npm install
+  - npm install sequelize-cli -g
+
+stages:
+  # - lint
+  - build
+  - test
+  - deploy_staging
+  - deploy_production
+
+# lint and test are two different jobs in the same stage.
+# This allows us to run these two in parallel and making build faster
+
+# Job 1:
+# Lint:
+#   stage: test
+#   script:
+#     - npm run lint
+
+# Job 2:
+Build:
+  stage: build
+  script:
+    - npm run build
+
+# Job 2:
+Test:
+  stage: test
+  script:
+    - npm run test
+    # ToDo: Add coverage
+
+# Deploy to staging
+Staging:
+  only:
+    - staging
+  stage: deploy_staging
+  script:
+    - bash deploy/staging.sh
+
+Production:
+  only:
+    - master
+  stage: deploy_production
+  script:
+    - bash deploy/production.sh
